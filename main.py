@@ -126,8 +126,6 @@ def acessarDados():
 
 def velocidadeVeiculos():
     try:
-        import plotly.graph_objects as go
-
         # Dados de exemplo
         categorias = [
             'Em repouso 0km/h',
