@@ -1,9 +1,14 @@
-import os
-import plotly.graph_objects as go
+try:
+    import os
+    import plotly.graph_objects as go
+except:
+    print("Error 404: Não foi encontrada a biblioteca 'plotly' instalada em seu sistema!")
 
 
 def clear():
     print("\n" * 130)  # Comando para limpar o console
+    os.system("clear") # Limpar o terminal em dispositivos que utilizam Linux
+    os.system("cls") # Limpar o terminal em dispositivos que utilizam windows
     print(techNovaSolutions)  # Imprimir a logo da empresa e os divisores
 
 
@@ -72,13 +77,15 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
     opcao = int(input("Escolha uma opção - "))
     match opcao:
         case 1:
-            clear()
             continuar = "s"
             while continuar != "n":
+                clear()
                 print("Itens da Loja - Fórmula E")
                 print(divisor)
+                cont = 0
                 for item in listaItensLoja:
-                    print(item)
+                    cont +=1
+                    print(f"[{cont}] - {item}")
                 print(f"{divisor} ")
                 novoItem = input("Digite o nome do item: ")
                 if novoItem in listaItensLoja:
@@ -111,7 +118,7 @@ def acessarDados():
     print("[1] Comparação: Veículos da Fórmula 1 x Fórmula E x Fórmula Indy")
     print("[2] Informações: Corredores brasileiros")
     print(f"{divisor}")
-    opcao = int(input("Selecione uma opção- "))
+    opcao = int(input("Selecione uma opção - "))
     match opcao:
         case 1:
             clear()
@@ -121,90 +128,89 @@ def acessarDados():
             acessarCorredores()
         case _:
             clear()
-            print(f"Opção inválida! {menuMsg}")
+            print(f"Opção inválida ou e desenvolvimento! {menuMsg}")
 
 
 def velocidadeVeiculos():
-    try:
-        # Dados de exemplo
-        categorias = [
-            'Em repouso 0km/h',
-            '1.86s',
-            '3s',
-            'Velocidade Máxima (Registrada)'
-        ]
+    # Dados de exemplo - Simulação
+    categorias = [
+        'Em repouso 0km/h',
+        '1.86s',
+        '3s',
+        'Velocidade Máxima (Registrada)'
+    ]
 
-        # Fórmula Indy
-        repouso_formula_indy = 0
-        um_oitentaedois_segundos_formula_indy = 100
-        velocidade_3_segundos_formula_indy = 162
-        velocidade_final_segundos_formula_indy = 380
+    # DEFINIÇÃO DAS VELOCIDADES ATINGIDAS EM RAZÃO DO TEMPO
 
-        # Fórmula E
-        repouso_formula_e = 0
-        um_oitentaedois_segundos_formula_e = 67
-        velocidade_3_segundos_formula_e = 110
-        velocidade_final_segundos_formula_e = 329
+    # Fórmula Indy
+    repouso_formula_indy = 0
+    um_oitentaedois_segundos_formula_indy = 100
+    velocidade_3_segundos_formula_indy = 162
+    velocidade_final_segundos_formula_indy = 380
 
-        # Fórmula 1
-        repouso_formula_1 = 0
-        um_oitentaedois_segundos_formula_1 = 62
-        velocidade_3_segundos_formula_1 = 100
-        velocidade_final_segundos_formula_1 = 372
+    # Fórmula E
+    repouso_formula_e = 0
+    um_oitentaedois_segundos_formula_e = 67
+    velocidade_3_segundos_formula_e = 110
+    velocidade_final_segundos_formula_e = 329
 
-        formula_e = [
-            repouso_formula_e,
-            um_oitentaedois_segundos_formula_e,
-            velocidade_3_segundos_formula_e,
-            velocidade_final_segundos_formula_e
-        ]
+    # Fórmula 1
+    repouso_formula_1 = 0
+    um_oitentaedois_segundos_formula_1 = 62
+    velocidade_3_segundos_formula_1 = 100
+    velocidade_final_segundos_formula_1 = 372
 
-        formula_1 = [
-            repouso_formula_1,
-            um_oitentaedois_segundos_formula_1,
-            velocidade_3_segundos_formula_1,
-            velocidade_final_segundos_formula_1
-        ]
+    formula_e = [
+        repouso_formula_e,
+        um_oitentaedois_segundos_formula_e,
+        velocidade_3_segundos_formula_e,
+        velocidade_final_segundos_formula_e
+    ]
 
-        formula_indy = [
-            repouso_formula_indy,
-            um_oitentaedois_segundos_formula_indy,
-            velocidade_3_segundos_formula_indy,
-            velocidade_final_segundos_formula_indy
-        ]
+    formula_1 = [
+        repouso_formula_1,
+        um_oitentaedois_segundos_formula_1,
+        velocidade_3_segundos_formula_1,
+        velocidade_final_segundos_formula_1
+    ]
 
-        # Criando o gráfico de linhas comparativo
-        fig = go.Figure()
+    formula_indy = [
+        repouso_formula_indy,
+        um_oitentaedois_segundos_formula_indy,
+        velocidade_3_segundos_formula_indy,
+        velocidade_final_segundos_formula_indy
+    ]
 
-        # Adicionando linha para Fórmula E
-        fig.add_trace(go.Scatter(
-            x=categorias, y=formula_e, mode='lines+markers',
-            name='Fórmula E', line=dict(color='blue')
-        ))
+    # Criando o gráfico de linhas comparativo
+    fig = go.Figure()
 
-        # Adicionando linha para Fórmula Indy
-        fig.add_trace(go.Scatter(
-            x=categorias, y=formula_indy, mode='lines+markers',
-            name='Fórmula Indy', line=dict(color='brown')
-        ))
+    # Adicionando linha para Fórmula E
+    fig.add_trace(go.Scatter(
+        x=categorias, y=formula_e, mode='lines+markers',
+        name='Fórmula E', line=dict(color='blue')
+    ))
 
-        # Adicionando linha para Fórmula 1
-        fig.add_trace(go.Scatter(
-            x=categorias, y=formula_1, mode='lines+markers',
-            name='Fórmula 1', line=dict(color='red')
-        ))
+    # Adicionando linha para Fórmula Indy
+    fig.add_trace(go.Scatter(
+        x=categorias, y=formula_indy, mode='lines+markers',
+        name='Fórmula Indy', line=dict(color='brown')
+    ))
 
-        # Atualizando o layout do gráfico
-        fig.update_layout(
-            title='Velocidades que os Veículos da Fórmula 1 e Fórmula E atingem',
-            xaxis_title='Tempo',
-            yaxis_title='Velocidade',
-        )
+    # Adicionando linha para Fórmula 1
+    fig.add_trace(go.Scatter(
+        x=categorias, y=formula_1, mode='lines+markers',
+        name='Fórmula 1', line=dict(color='red')
+    ))
 
-        # Exibindo o gráfico
-        fig.show()
-    except:
-        input(f"Erro! O programa não encontrou a biblioteca 'plotly'. {menuMsg}")
+    # Atualizando o layout do gráfico
+    fig.update_layout(
+        title='Velocidades que os Veículos da Fórmula 1, Fórmula Indy e Fórmula E atingem',
+        xaxis_title='Tempo',
+        yaxis_title='Velocidade',
+    )
+
+    # Exibição do gráfico
+    fig.show()
 
 
 # FUNÇÃO PARA ACESSAR A LISTA DE CORREDORES
@@ -242,6 +248,8 @@ def acessarCorredores():
             Em 2014, Di Grassi entrou para a Fórmula E pela equipe Audi Sport ABT Formula E Team, conquistando o título na 
             temporada 2016-17. Ao longo de sua carreira na Fórmula E, ele competiu por várias equipes, incluindo a ROKiT Venturi 
             Racing e a Mahindra Racing, antes de se juntar à equipe ABT CUPRA Formula E Team em 2023.""")
+        case _:
+            input(f"Opção inválida, corredor inexistente! {menuMsg}")
 
     main()
 
@@ -268,7 +276,7 @@ def main():
             acessarDados()
         case 5:
             clear()
-            print("Encerrando o programa...")
+            print("Programa encerrado...")
         case _:
             clear()
             print(f"Opção inválida! {menuMsg}")
