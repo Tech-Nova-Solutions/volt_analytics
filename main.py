@@ -37,16 +37,18 @@ def comprarTickets(listaDeCompras):
         print(divisor)
         tipoDeIngresso = int(input("Selecione o tipo de Ingresso: "))
         match tipoDeIngresso:
+        # A TECLA 1 REPRESENTA OS INGRESSOS DO TIPO INTEIRO COM O VALOR DE "R$ 300" CADA
             case 1:
                 numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
                 valorTotal += 300 * numeroDeIngressos
                 for ingresso in range(numeroDeIngressos):
-                    listaDeCompras.append(f"[🎫] x1 Ingresso Inteira")
+                    listaDeCompras.append(f"[🎟] x1 Ingresso Inteira")
+        # A TECLA 2 REPRESENTA OS INGRESSOS DO TIPO MEIA COM O VALOR DE "R$ 150" CADA
             case 2:
                 numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
                 valorTotal += 150 * numeroDeIngressos
                 for ingresso in range(numeroDeIngressos):
-                    listaDeCompras.append(f"🎫 x1 Ingresso Meia")
+                    listaDeCompras.append(f"[🎫] x1 Ingresso Meia")
             case 3:
                 input(f"Operação cancelara! {menuMsg}")
                 main()
@@ -59,18 +61,22 @@ def comprarTickets(listaDeCompras):
 {menuMsg}""")
     main()
 
+def printBuyList(list):
+    for i in range(len(list)):
+        print(f"{list[i]}")
+    print(divisor)
 
 # FUNÇÃO PARA VERIFICAR OS ITENS NO CARRINHO E ADICIONAR NOVOS
 def verificarCarrinho(listaDeCompras, listaItensLoja):
     clear()
     if len(listaDeCompras) == 0:
         print("Carrinho vazio")
-    else:
-        for i in range(len(listaDeCompras)):
-            print(f"{listaDeCompras[i]}")
         print(divisor)
+    else:
+        printBuyList(listaDeCompras)
     print("[1] - Adicionar um novo item")
-    print("[2] - Limpar lista de compras")
+    print("[2] - Limpar a Lista de compras")
+    print("[3] - Remover um ou mais itens da lista de compras")
     print("[3] - Voltar ao menu")
     opcao = int(input("Escolha uma opção - "))
     match opcao:
@@ -80,7 +86,7 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
                 clear()
                 print("Itens da Loja - Fórmula E")
                 print(divisor)
-                cont = 0
+                cont = 0 # INICIALIZAR O CONTADOR
                 for item in listaItensLoja:
                     cont +=1
                     print(f"[{cont}] - {item}")
@@ -97,6 +103,7 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
                 print(divisor)
                 continuar = input("Deseja continuar? [s/n]")
             verificarCarrinho(listaDeCompras, listaItensLoja)
+
         case 2:
             clear()
             if len(listaDeCompras) > 0:
@@ -105,7 +112,19 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
             else:
                 input(f'Erro! Seu carrinho está vazio! {menuMsg}')
             main()
+
         case 3:
+            clear()
+            printBuyList(listaDeCompras)
+            itemDelete = 1
+            if len(listaDeCompras) > 0 and itemDelete != 0:
+                itemDelete = int(input("Digite o número do item que será removido da lista de compras, ou então '0' para cancelar a operação:"))
+                del(listaDeCompras[itemDelete - 1])
+            else:
+                input(f'Erro! Seu carrinho está vazio! {menuMsg}')
+            main()
+
+        case 4:
             main()
         case _:
             input(f"Opção inválida! {menuMsg}")
@@ -220,7 +239,7 @@ def acessarCorredores():
     print(f"{divisor}")
     corredorBiografia = int(input('Escolha um dos corredores para acessar sua biografia: '))
 
-    match corredorBiografia:
+    match corredorBiografia: # ESSA SEÇÃO DEVERÁ SER IMPLEMENTADA NA WEB
         case 1:
             input("""Sérgio Sette Câmara Filho, nascido em 23 de maio de 1998 em Belo Horizonte, 
             é um piloto de automobilismo brasileiro. Ele competiu em várias categorias, incluindo Fórmula 3 
