@@ -1,8 +1,5 @@
-try:
-    import os
-    import plotly.graph_objects as go
-except:
-    print("Error 404: Não foi encontrada a biblioteca 'plotly' instalada em seu sistema!")
+import os
+import plotly.graph_objects as go
 
 
 def clear():
@@ -44,7 +41,7 @@ def comprarTickets(listaDeCompras):
                 numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
                 valorTotal += 300 * numeroDeIngressos
                 for ingresso in range(numeroDeIngressos):
-                    listaDeCompras.append(f"🎫 x1 Ingresso Inteira")
+                    listaDeCompras.append(f"[🎫] x1 Ingresso Inteira")
             case 2:
                 numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
                 valorTotal += 150 * numeroDeIngressos
@@ -65,12 +62,13 @@ def comprarTickets(listaDeCompras):
 
 # FUNÇÃO PARA VERIFICAR OS ITENS NO CARRINHO E ADICIONAR NOVOS
 def verificarCarrinho(listaDeCompras, listaItensLoja):
+    clear()
     if len(listaDeCompras) == 0:
         print("Carrinho vazio")
     else:
         for i in range(len(listaDeCompras)):
             print(f"{listaDeCompras[i]}")
-    clear()
+        print(divisor)
     print("[1] - Adicionar um novo item")
     print("[2] - Limpar lista de compras")
     print("[3] - Voltar ao menu")
@@ -87,10 +85,10 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
                     cont +=1
                     print(f"[{cont}] - {item}")
                 print(f"{divisor} ")
-                novoItem = input("Digite o nome do item: ")
-                if novoItem in listaItensLoja:
-                    novoItemFormatado = novoItem.capitalize()
-                    listaDeCompras.append(f"🚗 {novoItemFormatado}")
+                novoItem = int(input("Digite o nome do item: "))
+                if novoItem <= len(listaItensLoja):
+                    novoItem -= 1
+                    listaDeCompras.append(f"🚗 {listaItensLoja[novoItem]}")
                 else:
                     print('Erro! Item indisponível ou inexistente')
                 print(divisor)
@@ -274,7 +272,7 @@ def main():
         case 3:
             clear()
             acessarDados()
-        case 5:
+        case 4:
             clear()
             print("Programa encerrado...")
         case _:
@@ -285,7 +283,7 @@ def main():
 # Inicializar a lista de itens comprados pelo usuário
 listaDeCompras = []
 #Inicializar a lista de itens disponíveis na loja
-listaItensLoja = ["Bolsa - Fórmula E", "Camiseta - Fórmula E", "Calça - Fórmula E", "Blusa - Fórmula E"]
+listaItensLoja = ["[🎒] Bolsa - Fórmula E", "[👕] Camiseta - Fórmula E", "[👖] Calça - Fórmula E", "[👚] Blusa - Fórmula E", "[🚗] Carro Lego - Fórmula E"]
 
 # DEFAULT
 if __name__ == "__main__":
